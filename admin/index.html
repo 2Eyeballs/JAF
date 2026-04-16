@@ -5,18 +5,28 @@
   <title>Content Manager</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/netlify-identity-widget"></script>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
+  <div id="nc-root"></div>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Initialize Netlify Identity
+    window.CMS_MANUAL_INIT = true;
+    
     window.addEventListener('load', function() {
+      // Initialize Netlify Identity
       netlifyIdentity.init();
+      
+      // Initialize Decap CMS after a short delay to ensure everything is ready
+      setTimeout(function() {
+        if (window.CMS) {
+          window.CMS.init();
+        }
+      }, 100);
     });
     
-    // Show CMS interface after successful login
-    netlifyIdentity.on('login', user => {
-      document.location.href = '/admin/';
+    // Redirect to home after logout
+    netlifyIdentity.on('logout', () => {
+      document.location.href = '/';
     });
   </script>
 </body>

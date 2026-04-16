@@ -1,7 +1,11 @@
 backend:
-  name: github
-  repo: 2Eyeballs/JAF
+  name: git-gateway
   branch: main
+
+# Tell Netlify about the site
+sites:
+  - name: friendly-meerkat-7ac490
+    api_url: https://api.netlify.com
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"

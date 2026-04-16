@@ -1,0 +1,348 @@
+:root, [data-bs-theme=light] {
+  --bs-primary: #000000;
+  --bs-primary-rgb: 0,0,0;
+  --bs-primary-text-emphasis: #000000;
+  --bs-primary-bg-subtle: #CCCCCC;
+  --bs-primary-border-subtle: #999999;
+  --bs-success: #e06308;
+  --bs-success-rgb: 224,99,8;
+  --bs-success-text-emphasis: #5A2803;
+  --bs-success-bg-subtle: #F9E0CE;
+  --bs-success-border-subtle: #F3C19C;
+  --bs-info: #ffeb99;
+  --bs-info-rgb: 255,235,153;
+  --bs-info-text-emphasis: #665E3D;
+  --bs-info-bg-subtle: #FFFBEB;
+  --bs-info-border-subtle: #FFF7D6;
+  --bs-body-font-family: Fredoka, sans-serif;
+  --bs-body-line-height: 1.2;
+  --bs-link-hover-color: #d57504;
+  --bs-link-hover-color-rgb: 213,117,4;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #000000;
+  --bs-btn-border-color: #000000;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #000000;
+  --bs-btn-hover-border-color: #000000;
+  --bs-btn-focus-shadow-rgb: 217,217,217;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #000000;
+  --bs-btn-active-border-color: #000000;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #000000;
+  --bs-btn-disabled-border-color: #000000;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #000000;
+  --bs-btn-border-color: #000000;
+  --bs-btn-focus-shadow-rgb: 0,0,0;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #000000;
+  --bs-btn-hover-border-color: #000000;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #000000;
+  --bs-btn-active-border-color: #000000;
+  --bs-btn-disabled-color: #000000;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #000000;
+}
+
+.btn-success {
+  --bs-btn-color: #000000;
+  --bs-btn-bg: #e06308;
+  --bs-btn-border-color: #e06308;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-hover-bg: #E57A2D;
+  --bs-btn-hover-border-color: #E37321;
+  --bs-btn-focus-shadow-rgb: 34,15,1;
+  --bs-btn-active-color: #000000;
+  --bs-btn-active-bg: #E68239;
+  --bs-btn-active-border-color: #E37321;
+  --bs-btn-disabled-color: #000000;
+  --bs-btn-disabled-bg: #e06308;
+  --bs-btn-disabled-border-color: #e06308;
+}
+
+.btn-outline-success {
+  --bs-btn-color: #e06308;
+  --bs-btn-border-color: #e06308;
+  --bs-btn-focus-shadow-rgb: 224,99,8;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-hover-bg: #e06308;
+  --bs-btn-hover-border-color: #e06308;
+  --bs-btn-active-color: #000000;
+  --bs-btn-active-bg: #e06308;
+  --bs-btn-active-border-color: #e06308;
+  --bs-btn-disabled-color: #e06308;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #e06308;
+}
+
+.btn-info {
+  --bs-btn-color: #000000;
+  --bs-btn-bg: #ffeb99;
+  --bs-btn-border-color: #ffeb99;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-hover-bg: #FFEEA8;
+  --bs-btn-hover-border-color: #FFEDA3;
+  --bs-btn-focus-shadow-rgb: 38,35,23;
+  --bs-btn-active-color: #000000;
+  --bs-btn-active-bg: #FFEFAD;
+  --bs-btn-active-border-color: #FFEDA3;
+  --bs-btn-disabled-color: #000000;
+  --bs-btn-disabled-bg: #ffeb99;
+  --bs-btn-disabled-border-color: #ffeb99;
+}
+
+.btn-outline-info {
+  --bs-btn-color: #ffeb99;
+  --bs-btn-border-color: #ffeb99;
+  --bs-btn-focus-shadow-rgb: 255,235,153;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-hover-bg: #ffeb99;
+  --bs-btn-hover-border-color: #ffeb99;
+  --bs-btn-active-color: #000000;
+  --bs-btn-active-bg: #ffeb99;
+  --bs-btn-active-border-color: #ffeb99;
+  --bs-btn-disabled-color: #ffeb99;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #ffeb99;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.m-3 {
+  margin: 1rem !important;
+}
+
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.my-4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.my-5 {
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mt-2 {
+  margin-top: .5rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+.mt-6 {
+  margin-top: 4.5rem !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+
+.me-0 {
+  margin-right: 0 !important;
+}
+
+.me-3 {
+  margin-right: 1rem !important;
+}
+
+.me-4 {
+  margin-right: 1.5rem !important;
+}
+
+.me-auto {
+  margin-right: auto !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-1 {
+  margin-bottom: .25rem !important;
+}
+
+.mb-2 {
+  margin-bottom: .5rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.mb-5 {
+  margin-bottom: 3rem !important;
+}
+
+.ms-0 {
+  margin-left: 0 !important;
+}
+
+.ms-2 {
+  margin-left: .5rem !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+.p-4 {
+  padding: 1.5rem !important;
+}
+
+.p-7 {
+  padding: 6rem !important;
+}
+
+.px-2 {
+  padding-right: .5rem !important;
+  padding-left: .5rem !important;
+}
+
+.px-4 {
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.py-2 {
+  padding-top: .5rem !important;
+  padding-bottom: .5rem !important;
+}
+
+.py-4 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pt-3 {
+  padding-top: 1rem !important;
+}
+
+.pt-4 {
+  padding-top: 1.5rem !important;
+}
+
+.pt-5 {
+  padding-top: 3rem !important;
+}
+
+.pe-0 {
+  padding-right: 0 !important;
+}
+
+.pe-1 {
+  padding-right: .25rem !important;
+}
+
+.pe-3 {
+  padding-right: 1rem !important;
+}
+
+.pe-4 {
+  padding-right: 1.5rem !important;
+}
+
+.pe-6 {
+  padding-right: 4.5rem !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pb-2 {
+  padding-bottom: .5rem !important;
+}
+
+.pb-3 {
+  padding-bottom: 1rem !important;
+}
+
+.pb-4 {
+  padding-bottom: 1.5rem !important;
+}
+
+.pb-7 {
+  padding-bottom: 6rem !important;
+}
+
+.ps-0 {
+  padding-left: 0 !important;
+}
+
+.ps-3 {
+  padding-left: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  .p-md-5 {
+    padding: 3rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .mb-lg-0 {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .mb-lg-5 {
+    margin-bottom: 3rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .pb-lg-1 {
+    padding-bottom: .25rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .p-xl-4 {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .py-xl-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+

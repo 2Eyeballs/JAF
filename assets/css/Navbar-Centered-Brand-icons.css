@@ -1,0 +1,409 @@
+.bs-icon {
+  --bs-icon-size: .75rem;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--bs-icon-size);
+  width: calc(var(--bs-icon-size) * 2);
+  height: calc(var(--bs-icon-size) * 2);
+  color: var(--bs-primary);
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.bs-icon-xs {
+  --bs-icon-size: 1rem;
+  width: calc(var(--bs-icon-size) * 1.5);
+  height: calc(var(--bs-icon-size) * 1.5);
+}
+
+.bs-icon-sm {
+  --bs-icon-size: 1rem;
+}
+
+.bs-icon-md {
+  --bs-icon-size: 1.5rem;
+}
+
+.bs-icon-lg {
+  --bs-icon-size: 2rem;
+}
+
+.bs-icon-xl {
+  --bs-icon-size: 2.5rem;
+}
+
+.bs-icon.bs-icon-primary {
+  color: var(--bs-white);
+  background: var(--bs-primary);
+}
+
+.bs-icon.bs-icon-primary-light {
+  color: var(--bs-primary);
+  background: rgba(var(--bs-primary-rgb), .2);
+}
+
+.bs-icon.bs-icon-semi-white {
+  color: var(--bs-primary);
+  background: rgba(255, 255, 255, .5);
+}
+
+.bs-icon.bs-icon-rounded {
+  border-radius: .5rem;
+}
+
+/* Sticky navbar to stay at top on scroll */
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1040 !important;
+  background: linear-gradient(to bottom, #2d0a4e 0%, #2d0a4e 85%, rgba(45, 10, 78, 0) 100%) !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+body {
+  padding-top: 80px !important;
+}
+
+/* Desktop navbar - hide image on scroll */
+
+@media (min-width: 768px) {
+  .navbar {
+    position: fixed !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-brand:first-child {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Push text logo to the right */
+
+@media (min-width: 768px) {
+  .navbar-brand.text-start {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* Blurred background behind links - frosted glass effect */
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 1rem !important;
+    border-radius: 0 4px 4px 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-link {
+    color: #ffeb99 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-nav svg {
+    color: #ffeb99 !important;
+    fill: #ffeb99 !important;
+  }
+}
+
+/* Hide the first brand image on scroll */
+
+@media (min-width: 768px) {
+  .navbar.navbar-hidden .navbar-brand:first-child img {
+    display: none !important;
+  }
+}
+
+/* Desktop navbar collapsed to mobile style on scroll */
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed {
+    background: transparent !important;
+    transition: all 0.3s ease !important;
+    min-height: 100px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-brand:first-child {
+    display: none !important;
+    transition: all 1s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-brand.text-start {
+    margin-left: auto !important;
+    margin-right: 0px !important;
+    margin-top: 0px !important;
+    width: auto !important;
+    padding-top: 30px !important;
+    justify-content: flex-end !important;
+    transition: all 1s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-nav {
+    display: none !important;
+    transition: all 1s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1039 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-toggler {
+    display: flex !important;
+    position: fixed !important;
+    left: .5rem !important;
+    top: 7rem !important;
+    z-index: 1050 !important;
+    width: 100px !important;
+    height: 10px !important;
+    background-color: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    animation: spin 1.5s ease-in-out !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-toggler img {
+    display: flex !important;
+    width: 100px !important;
+    height: 90px !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    align-self: center !important;
+    vertical-align: middle !important;
+    animation: spin 1.5s ease-in-out !important;
+    transition: all 0.3s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-collapse.show {
+    background: linear-gradient(to bottom, rgba(45, 10, 78, 0) 0%, rgba(45, 10, 78, 0.9) 5%, rgba(45, 10, 78, 0.9) 95%, rgba(45, 10, 78, 0) 100%) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    display: block !important;
+    transition: all 0.3s ease !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-collapse.show .navbar-nav {
+    display: flex !important;
+    transition: all 0.3s ease !important;
+  }
+}
+
+/* Transparent navbar on mobile */
+
+@media (max-width: 767px) {
+  .navbar {
+    background-color: transparent !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1039 !important;
+    transition: none !important;
+  }
+}
+
+/* Blurred navbar when dropdown is open on mobile */
+
+@media (max-width: 767px) {
+  .navbar-collapse.show {
+    background: linear-gradient(to bottom, rgba(45, 10, 78, 0) 0%, rgba(45, 10, 78, 0.9) 5%, rgba(45, 10, 78, 0.9) 95%, rgba(45, 10, 78, 0) 100%) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse.show .nav-link {
+    color: #ffeb99 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse.show .navbar-nav svg {
+    color: #ffeb99 !important;
+    fill: #ffeb99 !important;
+  }
+}
+
+.navbar-toggler {
+  position: fixed !important;
+  left: 1rem !important;
+  top: 7rem !important;
+  z-index: 1050 !important;
+  width: 100px !important;
+  height: 10px !important;
+  background-color: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  animation: spin 1.5s ease-in-out !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.navbar-toggler img {
+  display: flex !important;
+  width: 100px !important;
+  height: 90px !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  align-self: center !important;
+  vertical-align: middle !important;
+  animation: spin 1.5s ease-in-out !important;
+}
+
+/* Hide toggle on medium screens and larger */
+
+@media (min-width: 768px) {
+  .navbar-toggler {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-toggler img {
+    display: none !important;
+  }
+}
+
+/* Show toggle when navbar is collapsed */
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-toggler {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-collapsed .navbar-toggler img {
+    display: flex !important;
+  }
+}
+
+/* Make JAF_TEXT_LOGO responsive on mobile */
+
+@media (max-width: 881px) {
+  .navbar-brand.text-start {
+    width: 210px !important;
+    padding: 40px 0px !important;
+  }
+}
+
+@media (max-width: 881px) {
+  .navbar-brand.text-start img {
+    width: 210px !important;
+    height: auto !important;
+  }
+}
+
+/* Tighter margins on tablet devices */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.nav-icons {
+  flex: 0 0 auto;
+  width: auto !important;
+  display: inline-flex !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+

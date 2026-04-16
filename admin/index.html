@@ -7,27 +7,14 @@
   <script src="https://cdn.jsdelivr.net/npm/netlify-identity-widget"></script>
 </head>
 <body>
-  <div id="nc-root"></div>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    window.CMS_MANUAL_INIT = true;
-    
-    window.addEventListener('load', function() {
-      // Initialize Netlify Identity
-      netlifyIdentity.init();
-      
-      // Initialize Decap CMS after a short delay to ensure everything is ready
-      setTimeout(function() {
-        if (window.CMS) {
-          window.CMS.init();
-        }
-      }, 100);
-    });
-    
-    // Redirect to home after logout
-    netlifyIdentity.on('logout', () => {
-      document.location.href = '/';
-    });
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.init();
+      window.netlifyIdentity.on('logout', () => {
+        document.location.href = '/';
+      });
+    }
   </script>
 </body>
 </html>

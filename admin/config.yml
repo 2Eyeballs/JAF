@@ -2,6 +2,8 @@ backend:
   name: github
   repo: 2Eyeballs/JAF
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: /api/v1/oauth/github
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"

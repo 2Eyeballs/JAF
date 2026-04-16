@@ -3,16 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/netlify-identity-widget"></script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
   <script>
+    // Configure Netlify Identity for Decap CMS
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
+      // Show the login widget when user visits
+      window.addEventListener('load', function() {
+        window.netlifyIdentity.init();
+        const user = window.netlifyIdentity.currentUser();
         if (!user) {
-          window.netlifyIdentity.show();
+          window.netlifyIdentity.open();
         }
+      });
+      
+      // Handle redirects after login
+      window.netlifyIdentity.on('login', user => {
+        console.log('User logged in:', user);
+      });
+      
+      window.netlifyIdentity.on('logout', () => {
+        console.log('User logged out');
       });
     }
   </script>

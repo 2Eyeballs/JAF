@@ -37,8 +37,8 @@
       }
     </script>
     <style>
-      /* Mobile-first responsive padding for consistent alignment */
-      @media (max-width: 768px) {
+      /* Mobile-first responsive padding for consistent alignment (below 400px) */
+      @media (max-width: 399px) {
         .container-fluid {
           padding-right: 1rem !important;
           padding-left: 1rem !important;
@@ -116,10 +116,16 @@
         scrollbar-width: thin;
       }
       
-      /* Hide navbar background on scroll down for mobile */
-      @media (max-width: 768px) {
+      /* Hide navbar background on scroll down for mobile (below 400px) */
+      @media (max-width: 399px) {
         nav.navbar-hidden {
           background-color: transparent !important;
+        }
+        
+        /* Remove margins on small mobile for Native Pollinator and Farm Journal sections */
+        div[style*="margin-left: 15px"] {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
         }
       }
     </style>
@@ -174,12 +180,12 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="padding-top: 20px;padding-right: 3rem;padding-left: 3rem;padding-bottom: 20px;background: var(--bs-focus-ring-color);">
+    <div class="container-fluid" style="padding-top: 20px;padding-right: 3rem;padding-left: 3rem;padding-bottom: 20px;background: var(--bs-focus-ring-color);margin-left: 15px;margin-right: 15px;">
         <div class="row">
-            <div class="col-lg-9 order-1 order-lg-1" style="padding-bottom: 16px;"><a class="fs-1" href="pollinatorgarden.html">Native Plant Pollinator Garden</a>
+            <div class="col-lg-6 order-1 order-lg-1" style="padding-bottom: 16px;"><a class="fs-1" href="pollinatorgarden.html">Native Plant Pollinator Garden</a>
                 <p style="font-size: 1.2rem;">Birds, bees and underbrush.</p>
             </div>
-            <div class="col-lg-3 order-2 order-lg-2"><a class="fs-1" href="pollinatorgarden.html"><img class="img-fluid" width="700" height="525" src="assets/img/pollinator%20garden/pollinatorgardenmap.jpg"></a></div>
+            <div class="col-lg-6 order-2 order-lg-2"><a class="fs-1" href="pollinatorgarden.html"><img class="img-fluid" width="700" height="525" src="assets/img/pollinator%20garden/pollinatorgardenmap.jpg"></a></div>
         </div>
     </div>
     <div class="container-fluid" style="padding-top: 20px;padding-bottom: 20px;padding-right: 1rem;padding-left: 1rem;">
@@ -191,13 +197,13 @@
             <div class="col-lg-6 order-lg-1"><a class="fs-1" href="gameoflogging.html"><img class="img-fluid" width="700" height="525" src="assets/img/historical%20photo/mcdonald_1924_wdavenport_treefell.jpg"></a></div>
         </div>
     </div>
-    <div class="container-fluid" style="padding-top: 20px;padding-right: 3rem;padding-left: 3rem;padding-bottom: 20px;background: var(--bs-focus-ring-color);">
+    <div class="container-fluid" style="padding-top: 20px;padding-right: 3rem;padding-left: 3rem;padding-bottom: 20px;background: var(--bs-focus-ring-color);margin-left: 15px;margin-right: 15px;">
         <div class="row">
-            <div class="col-lg-9 order-1 order-lg-1" style="padding-bottom: 16px;">
+            <div class="col-lg-6 order-1 order-lg-1" style="padding-bottom: 16px;">
                 <h1><a class="fs-1" href="farmjournal.html">Farm Journal</a></h1>
                 <p style="font-size: 1.2rem;">Stories from the farm blog.</p>
             </div>
-            <div class="col-lg-3 order-2 order-lg-2"><a href="farmjournal.html"><img class="img-fluid" width="700" height="525" src="assets/img/historical%20photo/newkingvalleyview1910.jpg"></a></div>
+            <div class="col-lg-6 order-2 order-lg-2"><a href="farmjournal.html"><img class="img-fluid" width="700" height="525" src="assets/img/historical%20photo/newkingvalleyview1910.jpg"></a></div>
         </div>
     </div>
     <div class="container-fluid" style="padding-top: 20px;padding-bottom: 20px;padding-right: 1rem;padding-left: 1rem;">
@@ -249,8 +255,8 @@
       const navbar = document.querySelector('nav.navbar');
       
       window.addEventListener('scroll', () => {
-        // Only apply on mobile (max-width: 768px)
-        if (window.innerWidth <= 768) {
+        // Only apply below 400px viewport width
+        if (window.innerWidth <= 400) {
           const currentScrollPosition = window.scrollY;
           
           if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {

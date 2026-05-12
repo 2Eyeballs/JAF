@@ -68,6 +68,38 @@
         margin-right: auto;
       }
     </style>
+    <style>
+      /* Custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #f77f00;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ff8c00;
+      }
+      
+      /* Firefox scrollbar */
+      * {
+        scrollbar-color: #f77f00 transparent;
+        scrollbar-width: thin;
+      }
+      
+      /* Hide navbar background on scroll down for mobile */
+      @media (max-width: 768px) {
+        nav.navbar-hidden {
+          background-color: transparent !important;
+        }
+      }
+    </style>
 </head>
 
 <body style="background: radial-gradient(#e7fbff 59%, #00aacc 80%, #f4ed7c 81%, #f77f00 86%, rgb(244,237,124) 91%, #f77f00 95%, #44235e 99%);">
@@ -168,6 +200,28 @@
     <script src="assets/js/Lightbox-Gallery-baguetteBox.min.js"></script>
     <script src="assets/js/Lightbox-Gallery.js"></script>
     <script src="assets/js/untitled.js"></script>
+    <script>
+      // Hide navbar on scroll down, show on scroll up (mobile only)
+      let lastScrollPosition = 0;
+      const navbar = document.querySelector('nav.navbar');
+      
+      window.addEventListener('scroll', () => {
+        // Only apply on mobile (max-width: 768px)
+        if (window.innerWidth <= 768) {
+          const currentScrollPosition = window.scrollY;
+          
+          if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+            // Scrolling down
+            navbar.classList.add('navbar-hidden');
+          } else {
+            // Scrolling up
+            navbar.classList.remove('navbar-hidden');
+          }
+          
+          lastScrollPosition = currentScrollPosition;
+        }
+      });
+    </script>
 </body>
 
 </html>

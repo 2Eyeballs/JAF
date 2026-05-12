@@ -80,6 +80,56 @@
       header + section {
         padding-top: 2rem !important;
       }
+      
+      /* Remove space above header */
+      header {
+        margin: 0;
+        padding: 0;
+        margin-top: -56px;
+      }
+      
+      nav {
+        margin-bottom: 0;
+        position: relative;
+        z-index: 1;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <style>
+      /* Custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #f77f00;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ff8c00;
+      }
+      
+      /* Firefox scrollbar */
+      * {
+        scrollbar-color: #f77f00 transparent;
+        scrollbar-width: thin;
+      }
+      
+      /* Hide navbar background on scroll down for mobile */
+      @media (max-width: 768px) {
+        nav.navbar-hidden {
+          background-color: transparent !important;
+        }
+      }
     </style>
 </head>
 
@@ -110,7 +160,7 @@
         </div>
     </nav>
     <header class="bg-transparent">
-        <section class="text-white py-4 py-xl-5" style="padding: 0px;background: transparent;padding-top: 0px;padding-bottom: 0px;">
+        <section class="text-white" style="padding: 0px;background: transparent;padding-top: 0px;padding-bottom: 0px;margin: 0;">
             <div class="container-fluid w-100 m-0 p-0">
                 <div class="border-0 ratio flex-column justify-content-center p-4 py-5 container-fluid" style="background: linear-gradient(var(--bs-success), rgba(0,123,255,0.2)), url(&quot;assets/img/historical%20photo/MapDelawareCounty1795.jpg&quot;) center / cover;height: 860px;">
                     <div class="row">
@@ -211,6 +261,28 @@
     <script src="assets/js/Lightbox-Gallery-baguetteBox.min.js"></script>
     <script src="assets/js/Lightbox-Gallery.js"></script>
     <script src="assets/js/untitled.js"></script>
+    <script>
+      // Hide navbar on scroll down, show on scroll up (mobile only)
+      let lastScrollPosition = 0;
+      const navbar = document.querySelector('nav.navbar');
+      
+      window.addEventListener('scroll', () => {
+        // Only apply on mobile (max-width: 768px)
+        if (window.innerWidth <= 768) {
+          const currentScrollPosition = window.scrollY;
+          
+          if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+            // Scrolling down
+            navbar.classList.add('navbar-hidden');
+          } else {
+            // Scrolling up
+            navbar.classList.remove('navbar-hidden');
+          }
+          
+          lastScrollPosition = currentScrollPosition;
+        }
+      });
+    </script>
 </body>
 
 </html>

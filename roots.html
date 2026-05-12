@@ -67,6 +67,19 @@
         margin-left: auto;
         margin-right: auto;
       }
+      
+      /* Center images on mobile */
+      @media (max-width: 768px) {
+        .col-lg-6 img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      
+      /* Reduce space between header and body content */
+      header + section {
+        padding-top: 2rem !important;
+      }
     </style>
 </head>
 
@@ -120,7 +133,7 @@
                     <h1><strong><span style="color: rgb(35, 0, 44); background-color: rgba(45, 10, 78, 0);">Way back in 1792,</span></strong></h1>
                     <p class="fs-4" style="font-size: 1.2rem;"><span style="color: rgb(0, 0, 0);">family members inherited large tracts of new land from homeland royalty. Then, just like today, the next generations thought they’d like to live elsewhere. </span><br><br><span style="color: rgb(0, 0, 0);">Alternatively, they could just run the place into the ground. That first sentence is not us. The second sentence is a lot more like us.</span></p>
                 </div>
-                <div class="col-lg-6 order-2 order-lg-2"><img src="assets/img/historical%20photo/mcdonald_1924_wdavenport.jpg" width="484" height="357"></div>
+                <div class="col-lg-6 order-2 order-lg-2"><img class="img-fluid" src="assets/img/historical%20photo/mcdonald_1924_wdavenport.jpg" width="484" height="357"></div>
             </div>
         </div>
         <div class="container">
@@ -132,13 +145,13 @@
                     <h2><strong>Shortly after arrival,</strong></h2>
                     <p class="fs-4"><span style="color: rgb(0, 0, 0);">we traded in the thrilling “Elks, Lions, and Rifles” starter-bundle for the ”Horses, Plows, and Two-Man Saw” starter kit. </span><br><br><span style="color: rgb(0, 0, 0);">Turns out there’s only so much fun in having a cabin with a blanket for a door, while keeping the fire lit all night long to keep the wolves at bay.</span></p>
                 </div>
-                <div class="col-lg-6 order-lg-1"><img src="assets/img/history/Screenshot%202026-01-28%20at%205.29.07%20PM.png" width="309" height="434"></div>
+                <div class="col-lg-6 order-lg-1"><img class="img-fluid" src="assets/img/history/Screenshot%202026-01-28%20at%205.29.07%20PM.png" width="309" height="434"></div>
             </div>
         </div>
         <div class="container" style="padding-top: 20px;padding-right: 3rem;padding-left: 3rem;padding-bottom: 20px;">
             <div class="row">
                 <div class="col-lg-6 order-2 order-lg-1" style="padding-bottom: 16px;">
-                    <h2>We embraced&nbsp;<span style="color: rgb(0, 0, 0);">the full boss of everything plan:</span></h2>
+                    <h2><span style="color: rgb(0, 0, 0);">The full boss of everything plan:</span></h2>
                     <p class="fs-5 ms-0" style="font-size: 1.2rem;"><span style="color: rgb(0, 0, 0);">Two brothers and a hand saw built the house around a three story, five hearth chimney. There was a barn raising, then tapping the maples, corn sprouting, and a welcoming of cows and sheep. </span><br><br><span style="color: rgb(0, 0, 0);">Since Amazon did not yet deliver over the river and through the woods, we got ourselves a spinning wheel, spun up yarn, wove fabric on a loom, sewed our own woolen petticoats, embroidered our own shirts, and even obtained multiple shoe forms. Despite our apparent genetic tendency to keep everything 'just in case', in my decades here, I’ve seen everything but shoes.</span><br><br></p>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2"><img class="img-fluid" width="1008" height="756" src="assets/img/historical%20photo/house%20objects/IMG_6858.jpeg"></div>
@@ -170,7 +183,7 @@
             <p class="lead" style="margin-top: 2rem;font-size: 1.5rem;margin-right: 2rem;margin-left: 2rem;"><br><br><br><br></p>
         </div>
     </section>
-    <footer class="text-center p-7 ps-0 pe-0 pb-7" data-bs-theme="light" style="background: linear-gradient(rgba(0,0,0,0) 4%, rgba(110,59,153,0.59) 68%, #310158);">
+    <footer class="text-center p-7 ps-0 pe-0" data-bs-theme="light" style="background: linear-gradient(rgba(0,0,0,0) 4%, rgba(110,59,153,0.59) 68%, #310158);">
         <ul class="list-inline text-center">
             <li class="list-inline-item me-4"><a class="link-body-emphasis" href="contact_us.html">Contact Us</a></li>
             <li class="list-inline-item me-4"><a class="link-body-emphasis" href="contact_us.html">Directions</a></li>

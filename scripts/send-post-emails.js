@@ -4,10 +4,14 @@
 const fs = require('fs');
 
 async function main() {
-  const postFile = process.argv[2];
+  let postFile = process.argv[2];
   if (!postFile) {
     console.error('Usage: node send-post-emails.js <path/to/post.md>');
     process.exit(1);
+  }
+  // Normalize: allow bare filename or posts/filename
+  if (!postFile.startsWith('posts/')) {
+    postFile = 'posts/' + postFile;
   }
 
   // Read and parse the post

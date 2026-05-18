@@ -2,8 +2,7 @@ backend:
   name: github
   repo: 2Eyeballs/JAF
   branch: main
-  auth_type: pkce
-  app_id: Ov23liYYFSBzLbQL58MX
+  base_url: https://sveltia-cms-auth.c-buerhaus.workers.dev
 
 media_folder: "assets/img/photos"
 public_folder: "/assets/img/photos"

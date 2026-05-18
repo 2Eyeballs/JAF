@@ -35,7 +35,7 @@ jobs:
         if: steps.diff.outputs.new_posts != ''
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Send emails
         if: steps.diff.outputs.new_posts != ''

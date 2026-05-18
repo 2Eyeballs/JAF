@@ -653,15 +653,20 @@
                         if (!res.ok) continue;
                         const text = await res.text();
 
-                        // Strip frontmatter
-                        const bodyMatch = text.match(/^---[\s\S]*?---\n([\s\S]*)$/);
-                        const body = bodyMatch ? bodyMatch[1] : text;
+                        // Parse frontmatter and body
+                        const fmMatch = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+                        let frontmatter = {};
+                        let body = text;
+                        if (fmMatch) {
+                            try { frontmatter = jsyaml.load(fmMatch[1]) || {}; } catch(e) {}
+                            body = fmMatch[2];
+                        }
 
                         allPosts.push({
-                            title: meta.title,
-                            date: meta.date,
-                            author: meta.author || '',
-                            excerpt: meta.excerpt || '',
+                            title: frontmatter.title || meta.title,
+                            date: frontmatter.date || meta.date,
+                            author: frontmatter.author || meta.author || '',
+                            excerpt: frontmatter.excerpt || meta.excerpt || '',
                             body: marked.parse(body),
                             filename: meta.filename
                         });

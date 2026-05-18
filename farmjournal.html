@@ -126,7 +126,7 @@
             <div class="col-md-12 col-lg-4">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">search</h4><input type="search">
+                        <h4 class="card-title">search</h4><input type="search" id="search-input" class="form-control" placeholder="Search posts...">
                     </div>
                 </div>
                 <div class="card">
@@ -606,6 +606,31 @@
     <script src="assets/js/untitled.js"></script>
     <script>
         // Load blog posts from local /posts/ folder (static, no GitHub API)
+        let allPosts = [];
+
+        function renderPosts(posts) {
+            const postsContainer = document.getElementById('posts-list');
+            if (!postsContainer) return;
+            if (posts.length === 0) {
+                postsContainer.innerHTML = '<p class="text-muted">No posts match your search.</p>';
+                return;
+            }
+            postsContainer.innerHTML = posts.map(post => `
+                <div class="col">
+                    <div class="card h-100 mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">${escapeHtml(post.title)}</h3>
+                            <p class="text-muted small mb-2">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}${post.author ? ' &mdash; ' + escapeHtml(post.author) : ''}</p>
+                            <p class="card-text">${escapeHtml(post.excerpt)}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <button class="btn btn-outline-primary btn-sm" onclick="showFullPost(this)" data-body="${encodeURIComponent(post.body)}">Read More</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         async function loadBlogPosts() {
             const postsContainer = document.getElementById('posts-list');
             if (!postsContainer) return;
@@ -624,8 +649,6 @@
                 // Sort by date descending
                 index.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                const posts = [];
-
                 for (const meta of index) {
                     try {
                         const res = await fetch(`./posts/${meta.filename}`);
@@ -636,7 +659,7 @@
                         const bodyMatch = text.match(/^---[\s\S]*?---\n([\s\S]*)$/);
                         const body = bodyMatch ? bodyMatch[1] : text;
 
-                        posts.push({
+                        allPosts.push({
                             title: meta.title,
                             date: meta.date,
                             author: meta.author || '',
@@ -649,25 +672,27 @@
                     }
                 }
 
-                if (posts.length === 0) {
+                if (allPosts.length === 0) {
                     postsContainer.parentElement.innerHTML = '<p>No posts yet. Check back soon!</p>';
                     return;
                 }
 
-                postsContainer.innerHTML = posts.map(post => `
-                    <div class="col">
-                        <div class="card h-100 mb-4">
-                            <div class="card-body">
-                                <h3 class="card-title">${escapeHtml(post.title)}</h3>
-                                <p class="text-muted small mb-2">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}${post.author ? ' &mdash; ' + escapeHtml(post.author) : ''}</p>
-                                <p class="card-text">${escapeHtml(post.excerpt)}</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-0">
-                                <button class="btn btn-outline-primary btn-sm" onclick="showFullPost(this)" data-body="${encodeURIComponent(post.body)}">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
+                renderPosts(allPosts);
+
+                // Wire up search
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const q = this.value.trim().toLowerCase();
+                        if (!q) { renderPosts(allPosts); return; }
+                        const filtered = allPosts.filter(p =>
+                            p.title.toLowerCase().includes(q) ||
+                            p.excerpt.toLowerCase().includes(q) ||
+                            p.author.toLowerCase().includes(q)
+                        );
+                        renderPosts(filtered);
+                    });
+                }
 
             } catch (error) {
                 console.error('Error loading posts:', error);

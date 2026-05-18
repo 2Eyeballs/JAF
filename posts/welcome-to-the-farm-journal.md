@@ -2,15 +2,17 @@
 title: Welcome to the Farm Journal
 date: 2026-05-18
 author: Mule Driver
-excerpt: >-
+excerpt: |-
   Spring has arrived at Jackass Farm and we couldn't be more ready for it.
-
 
   After a long winter of planning, arguing, and second-guessing ourselves, we're finally putting words to page. The Farm Journal is where we'll document what's growing, what's broken, what we fixed, and what we probably should have done differently.
 ---
+
 Spring has arrived at Jackass Farm and we couldn't be more ready for it.
 
 After a long winter of planning, arguing, and second-guessing ourselves, we're finally putting words to page. The Farm Journal is where we'll document what's growing, what's broken, what we fixed, and what we probably should have done differently.
+
+![](/assets/img/photos/IMG_6900.jpeg)
 
 ## What's happening right now
 
@@ -18,7 +20,7 @@ The pollinator garden is getting its first serious planting this season. We've s
 
 The future farmstand building on Route Six is slowly becoming less of a ruin. More on that soon.
 
-![](/assets/img/photos/photo-2026-02-08-19-51-40-3.jpg)
+![](/assets/img/photos/Screenshot%202026-02-22%20at%2011.07.08%20AM.png)
 
 ## What to expect here
 

@@ -119,10 +119,10 @@
                 <h1>Farm Journal</h1>
                 <p>Stories from the farm&nbsp;</p>
                 <div id="posts-container">
-                    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-1 mt-0" id="posts-list"></div>
+                    <div class="row gy-4 row-cols-1 mt-0" id="posts-list"></div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-4">
+            <div class="col-md-12 col-lg-4 mt-4 mt-lg-0">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">search</h4><input type="search" id="search-input" class="form-control" placeholder="Search posts...">
@@ -701,10 +701,12 @@
         function showFullPost(btn) {
             const body = decodeURIComponent(btn.dataset.body);
             const card = btn.closest('.card');
-            card.querySelector('.card-text').innerHTML = body;
+            const cardText = card.querySelector('.card-text');
+            const originalHtml = cardText.innerHTML;
+            cardText.innerHTML = body;
             btn.textContent = 'Close';
             btn.onclick = function() {
-                card.querySelector('.card-text').innerHTML = card.querySelector('.card-text').dataset.excerpt || '';
+                cardText.innerHTML = originalHtml;
                 btn.textContent = 'Read More';
                 btn.onclick = function() { showFullPost(btn); };
             };

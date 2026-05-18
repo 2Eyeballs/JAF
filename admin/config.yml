@@ -2,21 +2,18 @@ backend:
   name: git-gateway
   branch: main
 
-# Tell Netlify about the site
-sites:
-  - name: friendly-meerkat-7ac490
-    api_url: https://api.netlify.com
-
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "assets/img/photos"
+public_folder: "/assets/img/photos"
 
 collections:
   - name: "posts"
-    label: "Blog Posts"
+    label: "Farm Journal Posts"
     folder: "posts"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author", name: "author", widget: "select", options: ["Mule Driver", "Sorta Farmer"], default: "Mule Driver" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown on the blog listing page" }
       - { label: "Body", name: "body", widget: "markdown" }

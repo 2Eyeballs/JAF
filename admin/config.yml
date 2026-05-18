@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: 2Eyeballs/JAF
   branch: main
+  auth_type: pkce
+  app_id: Ov23liYYFSBzLbQL58MX
 
 media_folder: "assets/img/photos"
 public_folder: "/assets/img/photos"

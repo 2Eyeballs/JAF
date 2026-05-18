@@ -125,18 +125,22 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <section>
-                            <h4 class="fw-bold">Subscribe to the Journal</h4>
-                            <p></p>
-                        </section>
-                        <section>
-                            <div class="container">
-                                <form class="d-flex justify-content-center flex-wrap" method="post">
-                                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Your Email"></div>
-                                    <div class="mb-3"><button class="btn btn-primary ms-2" type="submit">Subscribe </button></div>
-                                </form>
+                        <h4 class="fw-bold">Subscribe to the Journal</h4>
+                        <p class="text-muted small">Get notified when new posts go up.</p>
+                        <form name="blog-subscribe" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="subscribe-form">
+                            <input type="hidden" name="form-name" value="blog-subscribe">
+                            <p class="d-none"><input name="bot-field"></p>
+                            <div class="mb-2">
+                                <input class="form-control" type="text" name="name" placeholder="Your Name" required>
                             </div>
-                        </section>
+                            <div class="mb-2">
+                                <input class="form-control" type="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                            <p class="text-success mt-2 d-none" id="subscribe-thanks">Thanks! You're subscribed.</p>
+                        </form>
                     </div>
                 </div>
                 <div class="card">
@@ -687,6 +691,24 @@
         } else {
             loadBlogPosts();
         }
+
+        // Subscribe form — show thank-you inline instead of redirecting
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('subscribe-form');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const data = new FormData(form);
+                fetch('/', { method: 'POST', body: data })
+                    .then(() => {
+                        form.reset();
+                        document.getElementById('subscribe-thanks').classList.remove('d-none');
+                    })
+                    .catch(() => {
+                        alert('Something went wrong. Please try again.');
+                    });
+            });
+        });
     </script>
     <script>
       // Hide navbar on scroll down, show on scroll up (mobile only)

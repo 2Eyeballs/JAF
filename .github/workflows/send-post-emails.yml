@@ -5,6 +5,12 @@ on:
     branches: [main]
     paths:
       - 'posts/*.md'
+  workflow_dispatch:
+    inputs:
+      post_file:
+        description: 'Post file to send (e.g. posts/2026-05-18-my-post.md)'
+        required: true
+        type: string
 
 jobs:
   send-emails:
@@ -18,7 +24,11 @@ jobs:
       - name: Find newly added posts
         id: diff
         run: |
-          NEW=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'posts/*.md' | tr '\n' ' ')
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            NEW="${{ github.event.inputs.post_file }}"
+          else
+            NEW=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'posts/*.md' | tr '\n' ' ')
+          fi
           echo "new_posts=$NEW" >> $GITHUB_OUTPUT
 
       - name: Setup Node

@@ -108,7 +108,6 @@
         }
       }
     </style>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
 <body style="background: radial-gradient(#e7fbff 59%, #00aacc 80%, #f4ed7c 81%, #f77f00 86%, rgb(244,237,124) 91%, #f77f00 95%, #44235e 99%);">
@@ -133,8 +132,7 @@
                     <div class="card-body">
                         <h4 class="fw-bold">Subscribe to the Journal</h4>
                         <p class="text-muted small">Get notified when new posts go up.</p>
-                        <form name="blog-subscribe" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="subscribe-form">
-                            <input type="hidden" name="form-name" value="blog-subscribe">
+                        <form id="subscribe-form">
                             <p class="d-none"><input name="bot-field"></p>
                             <div class="mb-2">
                                 <input class="form-control" type="text" name="name" placeholder="Your Name" required>
@@ -723,14 +721,15 @@
             loadBlogPosts();
         }
 
-        // Subscribe form — show thank-you inline instead of redirecting
+        // Subscribe form
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('subscribe-form');
             if (!form) return;
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const data = new FormData(form);
-                fetch('/', { method: 'POST', body: data })
+                fetch('/subscribe', { method: 'POST', body: data })
+                    .then(res => res.json())
                     .then(() => {
                         form.reset();
                         document.getElementById('subscribe-thanks').classList.remove('d-none');

@@ -41,8 +41,6 @@ jobs:
         if: steps.diff.outputs.new_posts != ''
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           for post in ${{ steps.diff.outputs.new_posts }}; do
             echo "Sending email for: $post"

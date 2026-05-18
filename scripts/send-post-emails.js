@@ -1,7 +1,8 @@
 // scripts/send-post-emails.js
 // Called by GitHub Action when a new post is pushed.
-// Reads subscribers from Netlify Forms and sends via Resend.
+// Reads subscribers from data/subscribers.json and sends via Resend.
 const fs = require('fs');
+const path = require('path');
 
 async function main() {
   let postFile = process.argv[2];
@@ -45,32 +46,24 @@ async function main() {
 
   const postUrl = 'https://jackassfarmcatskills.com/farmjournal.html';
 
-  const { NETLIFY_TOKEN, NETLIFY_SITE_ID, RESEND_API_KEY } = process.env;
-  if (!NETLIFY_TOKEN || !NETLIFY_SITE_ID || !RESEND_API_KEY) {
-    throw new Error('Missing required environment variables: NETLIFY_TOKEN, NETLIFY_SITE_ID, RESEND_API_KEY');
+  const { RESEND_API_KEY } = process.env;
+  if (!RESEND_API_KEY) {
+    throw new Error('Missing required environment variable: RESEND_API_KEY');
   }
 
-  // Fetch subscribers from Netlify Forms
-  const netlifyRes = await fetch(
-    `https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/submissions?per_page=100`,
-    { headers: { 'Authorization': `Bearer ${NETLIFY_TOKEN}` } }
-  );
-  if (!netlifyRes.ok) {
-    throw new Error(`Netlify API ${netlifyRes.status}: ${await netlifyRes.text()}`);
+  // Read subscribers from local file
+  const subscribersFile = path.join(__dirname, '..', 'data', 'subscribers.json');
+  if (!fs.existsSync(subscribersFile)) {
+    console.log('No subscribers file found — nothing sent.');
+    return;
   }
 
-  const all = await netlifyRes.json();
-  console.log(`Total submissions from API: ${all.length}`);
-  if (all.length > 0) {
-    const formNames = [...new Set(all.map(s => s.form_name))];
-    console.log('Form names found:', formNames.join(', '));
-  }
-  const blogSubs = all.filter(s => s.form_name === 'blog-subscribe');
+  const all = JSON.parse(fs.readFileSync(subscribersFile, 'utf8'));
 
   // Deduplicate by email
   const seen = new Set();
-  const subscribers = blogSubs.filter(s => {
-    const email = s.data?.email;
+  const subscribers = all.filter(s => {
+    const email = s.email;
     if (!email || seen.has(email.toLowerCase())) return false;
     seen.add(email.toLowerCase());
     return true;
@@ -84,8 +77,8 @@ async function main() {
   console.log(`Sending "${title}" to ${subscribers.length} subscriber(s)...`);
 
   for (const sub of subscribers) {
-    const name = sub.data?.name || 'Friend';
-    const email = sub.data.email;
+    const name = sub.name || 'Friend';
+    const email = sub.email;
 
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',

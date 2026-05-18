@@ -60,6 +60,11 @@ async function main() {
   }
 
   const all = await netlifyRes.json();
+  console.log(`Total submissions from API: ${all.length}`);
+  if (all.length > 0) {
+    const formNames = [...new Set(all.map(s => s.form_name))];
+    console.log('Form names found:', formNames.join(', '));
+  }
   const blogSubs = all.filter(s => s.form_name === 'blog-subscribe');
 
   // Deduplicate by email

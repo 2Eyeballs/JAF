@@ -594,103 +594,93 @@
     <script src="assets/js/Lightbox-Gallery.js"></script>
     <script src="assets/js/untitled.js"></script>
     <script>
-        // Load blog posts from the /posts folder
+        // Load blog posts from local /posts/ folder (static, no GitHub API)
         async function loadBlogPosts() {
-            const owner = '2Eyeballs';
-            const repo = 'JAF';
-            const postsPath = 'posts';
-            
+            const postsContainer = document.getElementById('posts-list');
+            if (!postsContainer) return;
+
             try {
-                // Fetch list of files in /posts directory
-                const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${postsPath}`;
-                const response = await fetch(apiUrl);
-                const files = await response.json();
-                
-                if (!Array.isArray(files)) return;
-                
-                const postFiles = files.filter(f => f.name.endsWith('.md'));
+                // Fetch the index manifest
+                const indexResponse = await fetch('./posts/index.json');
+                if (!indexResponse.ok) throw new Error('Could not load posts index');
+                const index = await indexResponse.json();
+
+                if (!Array.isArray(index) || index.length === 0) {
+                    postsContainer.parentElement.innerHTML = '<p>No posts yet. Check back soon!</p>';
+                    return;
+                }
+
+                // Sort by date descending
+                index.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                 const posts = [];
-                
-                // Fetch each markdown file
-                for (const file of postFiles) {
+
+                for (const meta of index) {
                     try {
-                        const contentResponse = await fetch(file.download_url);
-                        const content = await contentResponse.text();
-                        
-                        // Parse frontmatter and content
-                        const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-                        if (!match) continue;
-                        
-                        const frontmatter = match[1];
-                        const body = match[2];
-                        
-                        // Simple YAML frontmatter parsing
-                        const metadata = {};
-                        frontmatter.split('\n').forEach(line => {
-                            const [key, ...valueParts] = line.split(':');
-                            if (key && valueParts.length > 0) {
-                                metadata[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
-                            }
-                        });
-                        
-                        // Convert markdown to HTML
-                        const htmlBody = marked.parse(body);
-                        
+                        const res = await fetch(`./posts/${meta.filename}`);
+                        if (!res.ok) continue;
+                        const text = await res.text();
+
+                        // Strip frontmatter
+                        const bodyMatch = text.match(/^---[\s\S]*?---\n([\s\S]*)$/);
+                        const body = bodyMatch ? bodyMatch[1] : text;
+
                         posts.push({
-                            title: metadata.title || file.name,
-                            date: metadata.date || new Date().toISOString(),
-                            body: htmlBody,
-                            filename: file.name
+                            title: meta.title,
+                            date: meta.date,
+                            author: meta.author || '',
+                            excerpt: meta.excerpt || '',
+                            body: marked.parse(body),
+                            filename: meta.filename
                         });
                     } catch (e) {
-                        console.error('Error fetching post:', file.name, e);
+                        console.error('Error loading post:', meta.filename, e);
                     }
                 }
-                
-                // Sort posts by date (newest first)
-                posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                // Render posts
-                const postsContainer = document.getElementById('posts-list');
-                if (!postsContainer) return;
-                
+
                 if (posts.length === 0) {
                     postsContainer.parentElement.innerHTML = '<p>No posts yet. Check back soon!</p>';
                     return;
                 }
-                
+
                 postsContainer.innerHTML = posts.map(post => `
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h3 class="card-title">${escapeHtml(post.title)}</h3>
-                            <p class="text-muted small">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                            <div class="card-text">${post.body.substring(0, 300)}...</div>
-                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">Read More</a>
+                    <div class="col">
+                        <div class="card h-100 mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title">${escapeHtml(post.title)}</h3>
+                                <p class="text-muted small mb-2">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}${post.author ? ' &mdash; ' + escapeHtml(post.author) : ''}</p>
+                                <p class="card-text">${escapeHtml(post.excerpt)}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <button class="btn btn-outline-primary btn-sm" onclick="showFullPost(this)" data-body="${encodeURIComponent(post.body)}">Read More</button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
-                
+
             } catch (error) {
                 console.error('Error loading posts:', error);
-                const postsContainer = document.getElementById('posts-list');
-                if (postsContainer) {
-                    postsContainer.parentElement.innerHTML = '<p>Unable to load posts at this time.</p>';
-                }
+                postsContainer.parentElement.innerHTML = '<p>Unable to load posts at this time.</p>';
             }
         }
-        
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
+
+        function showFullPost(btn) {
+            const body = decodeURIComponent(btn.dataset.body);
+            const card = btn.closest('.card');
+            card.querySelector('.card-text').innerHTML = body;
+            btn.textContent = 'Close';
+            btn.onclick = function() {
+                card.querySelector('.card-text').innerHTML = card.querySelector('.card-text').dataset.excerpt || '';
+                btn.textContent = 'Read More';
+                btn.onclick = function() { showFullPost(btn); };
             };
-            return text.replace(/[&<>"']/g, m => map[m]);
         }
-        
-        // Load posts when page is ready
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return String(text).replace(/[&<>"']/g, m => map[m]);
+        }
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadBlogPosts);
         } else {

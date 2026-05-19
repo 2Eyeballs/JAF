@@ -2,10 +2,7 @@
 title: Welcome to the Farm Journal
 date: 2026-05-18
 author: Mule Driver
-excerpt: |-
-  Spring has arrived at Jackass Farm and we couldn't be more ready for it.
-
-  After a long winter of planning, arguing, and second-guessing ourselves, we're finally putting words to page. The Farm Journal is where we'll document what's growing, what's broken, what we fixed, and what we probably should have done differently.
+excerpt: Spring has arrived at Jackass Farm and we couldn't be more ready for it.
 ---
 
 Spring has arrived at Jackass Farm and we couldn't be more ready for it.

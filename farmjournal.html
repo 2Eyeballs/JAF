@@ -620,7 +620,7 @@
                 return;
             }
             postsContainer.innerHTML = posts.map(post => `
-                <div class="col">
+                <div class="col" id="${post.filename.replace(/\.md$/, '')}">
                     <div class="card h-100 mb-4">
                         <div class="card-body">
                             <h3 class="card-title">${escapeHtml(post.title)}</h3>
@@ -687,6 +687,14 @@
                 }
 
                 renderPosts(allPosts);
+
+                // Scroll to post if URL has a hash
+                if (window.location.hash) {
+                    const target = document.querySelector(window.location.hash);
+                    if (target) {
+                        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                    }
+                }
 
                 // Wire up search
                 const searchInput = document.getElementById('search-input');

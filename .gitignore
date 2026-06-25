@@ -1,0 +1,24 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Raw/working photo/video folders
+assets/img/gol_june2026/GOL_ClassDocumentation_PhotoSusanWagner_June2026/for mv/
+assets/img/gol_june2026/GOL_ClassDocumentation_PhotoSusanWagner_June2026/mov/
+assets/img/gol_june2026/Jackass Farm - New Photos and Video June 22, 2026/
+
+# Archive/zip files
+*.zip
+
+# Video files
+*.MOV
+*.mov
+*.mp4
+*.MP4
+
+# HEIC source images
+*.HEIC
+*.heic
+
+# Node modules (if ever used)
+node_modules/
